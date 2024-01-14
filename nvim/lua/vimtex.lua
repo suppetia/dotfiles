@@ -6,5 +6,6 @@ vim.g.vimtex_quickfix_open_on_warning = 0
 -- enable VimTeX's PDF viewer inderface
 vim.g.vimtex_view_enabled = 1
 -- use Zathura as the VimTeX PDF viewer
-vim.g.vimtex_view_method = "zathura"
+-- vim.g.vimtex_view_method = "zathura"
+vim.g.vimtex_view_method = "zathura_simple"
 

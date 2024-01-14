@@ -1,0 +1,72 @@
+global !p
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def comment(): 
+	return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+def env(name):
+	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+	return x != '0' and y != '0'
+
+endglobal
+
+
+snippet tubsmathtemplate "Math template" b
+\documentclass[10pt, a4paper, oneside, style=screen]{tubsartcl}
+\usepackage{amsmath,amssymb, amsthm}
+\usepackage[b]{esvect}
+\usepackage{pdfpages}
+\usepackage{ngerman}
+\usepackage{wrapfig}
+\usepackage{appendix}
+\usepackage{placeins}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{booktabs}
+\usepackage{subfig}
+%\usepackage{subcaption}
+%\usepackage{mathptmx}
+%\usepackage{braket}
+\usepackage{physics}
+\usepackage[shortlabels]{enumitem}
+\graphicspath{{./Graphiken/}}
+\usepackage[locale=DE, separate-uncertainty=true]{siunitx}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=black]{hyperref}
+
+\geometry{headsep=-20pt, top=2.5cm}
+
+% declare Theorems exercise 
+\theoremstyle{plain}
+\newtheorem{excercise}{Aufgabe}[section]
+
+% change equation numbering style to starting each section with a new formula
+\numberwithin{equation}{section}
+% change format of eqref
+\renewcommand{\eqref}[1]{Gl.~(\ref{#1})}
+\newcommand{\figref}[1]{Abb.~\ref{#1}}
+\newcommand{\tabref}[1]{Tab.~\ref{#1}}
+\newcommand{\secref}[1]{Kapitel ~\ref{#1}}
+
+% visual update for bars over characters/expressions
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+% shortcut for total differential in math environemt
+\newcommand{\diff}{\text{d}}
+\renewcommand{\v}[1]{\underbar{#1}}
+\newcommand{\e}[1]{\mathrm{e}^{#1}}
+
+% the following lines break vimtex's mathmode detection
+%\newcolumntype{R}{>{$}r<{$}} % math-mode version of "r" column type
+%\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+
+\setcounter{section}{0}
+\begin{document}
+	$0
+\end{document}
+endsnippet
+
+context "env('array')"
+snippet "(\d|dots)\s" "matrix &" rA
+`!p snip.rv = match.group(1) + " & "`
+endsnippet

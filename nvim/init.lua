@@ -19,9 +19,6 @@ vim.opt.expandtab = true  -- expand tab into spaces
 
 vim.opt.termguicolors = true  -- enable best version of colorscheme
 
-vim.opt.spelllang = "de"
-vim.opt.spell = true
-
 -- use function for easy remapping of keys
 function map(modes, lhs, rhs, opts)
     local options = { noremap = true, silent = true }
@@ -33,6 +30,23 @@ function map(modes, lhs, rhs, opts)
       vim.keymap.set(mode, lhs, rhs, options)
     end
 end
+
+-- enable spell checking
+vim.opt.spelllang = {"de_de", "en_us"}
+vim.opt.spell = true
+-- shortcut to correcting the last spelling mistake
+map("i", "<C-l>", "<c-g>u<Esc>[s1z=`]a<c-g>u")
+
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = vim.api.nvim_create_augroup("HighlightYank", {}),
+	desc = "Highlight yanked text",
+	callback = function()
+		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 300 })
+	end,
+})
+
+-- 
 
 -- install and setup the packaging manager
 local lazy = {}
@@ -75,8 +89,19 @@ lazy.setup({
   {'lervag/vimtex'},
   {"nvim-treesitter/nvim-treesitter"},
   {"nvim-tree/nvim-tree.lua"}, {"nvim-tree/nvim-web-devicons"},
-
-}) 
+  {"terrortylor/nvim-comment"},
+  -- see: https://blog.codeminer42.com/configuring-language-server-protocol-in-neovim/
+  {"neovim/nvim-lspconfig"},  -- enable LSP
+  {"williamboman/mason.nvim"},
+  {"williamboman/mason-lspconfig.nvim"},
+  {"jose-elias-alvarez/null-ls.nvim"}, -- for formatters and linters
+  {"hrsh7th/nvim-cmp", event = { "InsertEnter", "CmdlineEnter" }},
+  {"hrsh7th/cmp-nvim-lsp"},
+  {"hrsh7th/cmp-buffer"},
+  {"hrsh7th/cmp-path"},
+  {"hrsh7th/cmp-cmdline"},
+  {"quangnguyen30192/cmp-nvim-ultisnips"},
+})
 
 require('lualine').setup({
   options = {
@@ -92,9 +117,11 @@ vim.cmd.colorscheme('tokyonight')  -- enable colorscheme 'tokyonight' by folke
 require('ultisnips')
 require("vimtex")
 require("treesitter-config")
+require("nvim_comment-config")
 
 -- configure nvim-tree
 -- disable netrw at the very start of your init.lua
+-- this needs to be enabled to download files from the internet
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -102,6 +129,11 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
 -- empty setup using defaults
-require("nvim-tree").setup()
+require("nvim-tree").setup({
+  disable_netrw = true,
+})
 map("n", "<leader>e", "<cmd>NvimTreeToggle<cr>")
 
+-- setup LSP and autocompletion
+require("lsp")
+require("cmp-setup")
