@@ -72,12 +72,29 @@ snippet "([^\\])hbar" "hbar" riA
 `!p snip.rv = match.group(1)` \hbar
 endsnippet
 
+priority 100
+context "math()"
+snippet "([a-zA-Z])vo" "vector operator" riA
+\hat{\vec{`!p snip.rv = match.group(1)`$1}}
+endsnippet
+
+priority 10
+context "math()"
+snippet vo "vector operator" wA
+\hat{\vec{${1:${VISUAL}}}}
+endsnippet
+
+context "math()"
+snippet dag "dagger" iA
+^\dagger
+endsnippet
+
 # from Gilles Castel
-snippet "\<(.*?)\|" "bra" riA
+snippet "\<(.*?)(?<!left)(?<!right)\|" "bra" riA
 \bra{`!p snip.rv = match.group(1).replace('q', f'\psi').replace('f', f'\phi')`}
 endsnippet
 
-snippet "\|(.*?)\>" "ket" riA
+snippet "(?<!left)(?<!right)\|(.*?)\>" "ket" riA
 \ket{`!p snip.rv = match.group(1).replace('q', f'\psi').replace('f', f'\phi')`}
 endsnippet
 

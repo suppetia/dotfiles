@@ -42,7 +42,7 @@ endsnippet
 
 snippet beg "begin{} / end{}" bA
 \\begin{$1}
-	$0
+	${0:${VISUAL}}
 \\end{$1}
 endsnippet
 
@@ -102,8 +102,13 @@ snippet =< "implied by" Ai
 \impliedby
 endsnippet
 
+# context "math()"
+# snippet diff "diff" wA
+# `!p snip.rv = '\diff'
+context "
+
 context "math()"
-snippet iff "iff" Ai
+snippet "[^d]iff" "iff" riA
 \iff
 endsnippet
 
@@ -227,6 +232,11 @@ snippet arrr "array" iA
 endsnippet
 
 context "math()"
+snippet abs "absolute" iA
+\left| ${1:${VISUAL}} \right|$0
+endsnippet
+
+context "math()"
 snippet () "left( right)" iA
 \left( ${1:${VISUAL}} \right) $0
 endsnippet
@@ -239,19 +249,19 @@ snippet lr( "left( right)" i
 \left( ${1:${VISUAL}} \right) $0
 endsnippet
 
-snippet lr| "left| right|" i
+snippet lr| "left| right|" iA
 \left| ${1:${VISUAL}} \right| $0
 endsnippet
 
-snippet lr{ "left\{ right\}" i
+snippet lr{ "left\{ right\}" iA
 \left\\{ ${1:${VISUAL}} \right\\} $0
 endsnippet
 
-snippet lrb "left\{ right\}" i
+snippet lrb "left\{ right\}" iA
 \left\\{ ${1:${VISUAL}} \right\\} $0
 endsnippet
 
-snippet lr[ "left[ right]" i
+snippet lr[ "left[ right]" iA
 \left[ ${1:${VISUAL}} \right] $0
 endsnippet
 
@@ -394,9 +404,16 @@ snippet mcal "mathcal" iA
 \mathcal{$1}$0
 endsnippet
 
+priority 100
 context "math()"
 snippet mbb "mathbb" iA
 \mathbb{$1}$0
+endsnippet
+
+priority 10
+context "math()"
+snippet bb "boldsymbol" iA
+\boldsymbol{$1}$0
 endsnippet
 
 snippet lll "l" iA
@@ -562,10 +579,13 @@ snippet <> "hokje" iA
 \diamond 
 endsnippet
 
-
 context "math()"
 snippet '(?<!i)sts' "text subscript" irA
 _\text{$1} $0
+endsnippet
+
+snippet ttt "texttt" wA
+\texttt{${1:${VISUAL}}} $0
 endsnippet
 
 context "math()"
@@ -645,18 +665,34 @@ snippet DD "D" iA
 \mathbb{D}
 endsnippet
 
-context "math()"
-snippet "(\d+|[a-zA-Z\}]+)\.\.(\d|\w)" "numberRange" riA
-`!p snip.rv = f"{match.group(1)},\\ldots,{match.group(2)}"`
+snippet CC "C" iA
+\mathbb{C}
 endsnippet
 
 context "math()"
-snippet ,. "spaced dot" iA
-\,.
+snippet "(\d+|[a-zA-Z\}]+)\.\.(\d|\w)" "numberRange" riA
+`!p snip.rv = f"{match.group(1)},\\dots,{match.group(2)}"`
 endsnippet
-context "math()"
-snippet ., "spaced dot" iA
-\,.
+
+snippet glqq "glqq grqq{}" w
+\glqq ${1:${VISUAL}}\grqq{}$0
 endsnippet
+
+snippet eqr "eqref" wA
+\eqref{eq:$1}$0
+endsnippet
+
+snippet eqs. "eqs ref" wA
+eqs.~(\ref{eqs:$1})$0
+endsnippet
+
+# context "math()"
+# snippet ,. "spaced dot" iA
+# \,.
+# endsnippet
+# context "math()"
+# snippet ., "spaced dot" iA
+# \,.
+# endsnippet
 
 # vim:ft=snippets

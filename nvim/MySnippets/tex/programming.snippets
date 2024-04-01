@@ -1,0 +1,10 @@
+snippet mint "minted" bA
+\begin{minted}{${1:Python}}
+	${2:${VISUAL}}
+\end{minted}
+$0
+endsnippet
+
+snippet "([^{\\])dish" "dish" rwA
+`!p snip.rv = match.group(1)`\dish${1:{}} $0
+endsnippet

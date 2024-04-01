@@ -20,8 +20,8 @@ symbols = {
   "a": "alpha",
   "b": "beta",
   "y": "gamma",
-  "p": "phi",
-	"q": "psi",
+  "f": "phi",
+	"p": "psi",
   "w": "omega",
   "z": "zeta",
   "x": "chi",
@@ -29,6 +29,10 @@ symbols = {
 	"m": "mu",
 	"l": "lambda",
 	"s": "sigma",
+	"r": "rho",
+	"n": "eta",
+	"v": "nu",
+	"k": "kappa",
 }
 val = symbols.get(match.group(1).lower())
 if val is None:
@@ -40,10 +44,10 @@ endsnippet
 
 priority 100
 context "math()"
-snippet "::(p|t|e)" "alternative greek Symbols" rwA
+snippet "::(f|t|e)" "alternative greek Symbols" rwA
 \\`!p 
 symbols = {
-  "p": "varphi",
+  "f": "varphi",
   "t": "vartheta",
 	"e": "varepsilon",
 }
@@ -51,7 +55,7 @@ snip.rv = symbols[match.group(1)]
 `
 endsnippet
 
-snippet :qed "QED" wA
+snippet BOX "QED box" wA
 \hspace*{\fill}$\Box$
 endsnippet
 
