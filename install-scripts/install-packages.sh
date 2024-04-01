@@ -36,14 +36,19 @@ fi
 
 
 
-sudo apt-get -y install python3-neovim
+# sudo apt-get -y install python3-neovim
+# sudo apt-get -y install ninja-build gettext cmake unzip curl build-essential
+curl -O https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
+tar xzvf nvim-linux64.tar.gz
+PATH=$PATH:${PWD}/nvim-linux64/bin
 if type -p nvim > /dev/null; then
-    echo "nvim Installed" >> $log_file
+    echo "nvim Installed to ${PWD}/nvim-linux64/bin which is added to PATH" >> $log_file
 else
     echo "nvim FAILED TO INSTALL!!!" >> $log_file
 fi
 
-sudo apt-get -y install python3-dev
+sudo apt-get -y install python3-dev python3-pip
+python3 -m pip install pynvim
 
 
 
