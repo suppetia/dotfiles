@@ -9,6 +9,13 @@ def env(name):
 	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
 	return x != '0' and y != '0'
 
+def envs(names):
+	for name in names:
+		[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+		if x != '0' and y != '0':
+			return True
+	return False
+
 endglobal
 
 
@@ -67,7 +74,34 @@ snippet tubsmathtemplate "Math template" b
 \end{document}
 endsnippet
 
-context "env('array')"
-snippet "(\d|dots)\s" "matrix &" rA
+context "envs(['array', 'pmatrix', 'tabular'])"
+snippet "(\d|dots)\s" "matrix/table &" rA
 `!p snip.rv = match.group(1) + " & "`
 endsnippet
+
+context "envs(['array', 'pmatrix', 'tabular'])"
+snippet "([a-zA-Z)}]+)\s\s" "matrix/table & for letters" rA
+`!p snip.rv = match.group(1) + " & "`
+endsnippet
+
+snippet def "environment definition" bA
+\\begin{definition}${1:[$2]}
+	${0:${VISUAL}}
+\\end{definition}
+endsnippet
+
+# context "math()"
+# snippet "ker([a-zA-Z])" "kernel" rA
+# \text{ker}\,`!p snip.rv = match.group(1)`
+# endsnippet
+#
+# context "math()"
+# snippet "im([a-zA-Z])" "image" rA
+# \text{im}\,`!p snip.rv = match.group(1)`
+# endsnippet
+#
+# context "math()"
+# snippet "det([a-zA-Z])" "determinant" rA
+# \text{det}\,`!p snip.rv = match.group(1)`
+# endsnippet
+#

@@ -32,7 +32,7 @@ function map(modes, lhs, rhs, opts)
 end
 
 -- enable spell checking
-vim.opt.spelllang = {"de_de", "en_us"}
+vim.opt.spelllang = {"en_us","de_de"}
 vim.opt.spell = true
 -- shortcut to correcting the last spelling mistake
 map("i", "<C-l>", "<c-g>u<Esc>[s1z=`]a<c-g>u")
@@ -83,13 +83,18 @@ lazy.path = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 lazy.opts = {}
 
 lazy.setup({
-  {'folke/tokyonight.nvim'},
+  -- {'folke/tokyonight.nvim'},
+  -- {"shaunsingh/nord.nvim"},
+  {'AlexvZyl/nordic.nvim'},
+  -- {"rose-pine/neovim"},
+  -- {"olimorris/onedarkpro.nvim", priority=1000},
   {'nvim-lualine/lualine.nvim'},
   {'SirVer/ultisnips'},
   {'lervag/vimtex'},
   {"nvim-treesitter/nvim-treesitter"},
   {"nvim-tree/nvim-tree.lua"}, {"nvim-tree/nvim-web-devicons"},
   {"terrortylor/nvim-comment"},
+  -- {"Raimondi/delimitMate", event = "InsertEnter"},
   -- see: https://blog.codeminer42.com/configuring-language-server-protocol-in-neovim/
   {"neovim/nvim-lspconfig"},  -- enable LSP
   {"williamboman/mason.nvim"},
@@ -108,11 +113,15 @@ require('lualine').setup({
     icons_enabled = false,
     section_separators = '|',
     component_separators = "-",
+    theme="nordic",
   }
 })
 
 -- configure colorscheme
-vim.cmd.colorscheme('tokyonight')  -- enable colorscheme 'tokyonight' by folke
+-- vim.cmd.colorscheme('tokyonight')  -- enable colorscheme 'tokyonight' by folke
+vim.cmd.colorscheme('nordic')
+-- vim.cmd.colorscheme("rose-pine")
+-- vim.cmd.colorscheme("onedark")
 
 require('ultisnips')
 require("vimtex")

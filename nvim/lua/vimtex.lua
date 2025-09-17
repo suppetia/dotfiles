@@ -9,3 +9,6 @@ vim.g.vimtex_view_enabled = 1
 -- vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_view_method = "zathura_simple"
 
+-- Always treat subfiles as foot documents (for projects using the subfile package)
+vim.g.vimtex_subfile_start_local = 1
+

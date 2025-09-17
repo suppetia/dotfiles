@@ -13,7 +13,7 @@ end
 -- which servers are required to be installed
 local servers = {
     "clangd", -- C LSP
-    -- "fortls", -- Fortran LSP
+    "fortls", -- Fortran LSP
     "julials", -- Julia
     "ltex", "texlab", -- LaTeX
     "lua_ls", -- Lua

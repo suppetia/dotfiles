@@ -40,7 +40,7 @@ fi
 # sudo apt-get -y install ninja-build gettext cmake unzip curl build-essential
 curl -O https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
 tar xzvf nvim-linux64.tar.gz
-PATH=$PATH:${PWD}/nvim-linux64/bin
+export $PATH:${PWD}/nvim-linux64/bin
 if type -p nvim > /dev/null; then
     echo "nvim Installed to ${PWD}/nvim-linux64/bin which is added to PATH" >> $log_file
 else
