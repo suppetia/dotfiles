@@ -1,0 +1,27 @@
+# inspired by https://github.com/TwiggieSmallz/Default-Alacritty-TOML-Config/blob/main/alacritty.toml
+live_config_reload = true
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+startup_mode = "Windowed"
+title = "Alacritty"
+dynamic_title = true 
+decorations_theme_variant = "None"
+decorations = "Full"
+opacity = 1
+blur = true 
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+save_to_clipboard = false
+
+[cursor]
+style = { shape = "Block", blinking = "Off" }
+unfocused_hollow = true
+thickness = 0.15

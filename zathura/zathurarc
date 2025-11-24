@@ -1,0 +1,2 @@
+map <C-c> exec "zathura $FILE"
+
