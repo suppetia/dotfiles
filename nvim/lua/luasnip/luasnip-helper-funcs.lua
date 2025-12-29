@@ -12,6 +12,9 @@ function M.get_visual(args, parent)
     return sn(nil, i(1))
   end
 end
+function M.get_regexmatch(_, snip)
+  return snip.captures[1]
+end
 -- condition to start a snippet at the beginning of a line
 M.line_begin = require("luasnip.extras.expand_conditions").line_begin
 M.not_preceeded_by = require("luasnip.extras.expand_conditions").trigger_not_preceded_by

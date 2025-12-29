@@ -25,24 +25,20 @@ tex_utils.in_tikz = function() -- TikZ picture environment detection
   return tex_utils.in_env("tikzpicture")
 end
 
-tex_utils.in_envs = function(envs, ...)
-  if type(envs) == "table" then
-    for index, value in ipairs(envs) do
-      if tex_utils.in_env(value) then
-        return true
-      end
-    end
-  else
-    if tex_utils.in_env(envs) then
+local function check_envs(envs)
+  -- 1. Check if the first argument 'envs' is a table (list of environments)
+  for _, env in ipairs(envs) do
+    if tex_utils.in_env(env) then
       return true
     end
   end
-  for index, value in ipairs(arg) do
-    if tex_utils.in_env(value) then
-      return true
-    end
+end
+
+tex_utils.in_envs = function(...)
+  local args = { ... }
+  return function()
+    return check_envs(args)
   end
-  return false
 end
 
 return tex_utils

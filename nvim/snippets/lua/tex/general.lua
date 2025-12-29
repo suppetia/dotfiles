@@ -6,11 +6,10 @@ local tex_helpers = require("luasnip.luasnip-helper-tex")
 local th = tex_helpers
 
 local k = require("luasnip.nodes.key_indexer").new_key
-local k_filename = k("k_filename")
 
 return {
   s(
-    { trig = "beg", dscr = "A generic new environment", condition = line_begin, snippetType = "autosnippet" },
+    { trig = "beg", desc = "A generic new environment", condition = line_begin, snippetType = "autosnippet" },
     fmta(
       [[
         \begin{<>}
@@ -22,7 +21,7 @@ return {
     )
   ),
   s(
-    { trig = "eqq", dscr = "equation environment", condition = line_begin, snippetType = "autosnippet" },
+    { trig = "eqq", desc = "equation environment", condition = line_begin, snippetType = "autosnippet" },
     fmta(
       [[
         \begin{equation}
@@ -34,7 +33,7 @@ return {
     )
   ),
   s(
-    { trig = "ali", dscr = "align environment", condition = line_begin, snippetType = "autosnippet" },
+    { trig = "ali", desc = "align environment", condition = line_begin, snippetType = "autosnippet" },
     fmta(
       [[
         \begin{align*}
@@ -46,7 +45,7 @@ return {
     )
   ),
   s(
-    { trig = "fig", dscr = "figure environment", condition = line_begin },
+    { trig = "fig", desc = "figure environment", condition = line_begin },
     fmta(
       [[
         \begin{figure}[<>]
@@ -80,7 +79,7 @@ return {
     )
   ),
   s(
-    { trig = "tikz", dscr = "Tikz picture", condition = line_begin },
+    { trig = "tikz", desc = "Tikz picture", condition = line_begin },
     fmta(
       [[
       \begin{center}
@@ -93,7 +92,7 @@ return {
     )
   ),
   s(
-    { trig = "enum", dscr = "enumerate", condition = line_begin, snippetType = "autosnippet" },
+    { trig = "enum", desc = "enumerate", condition = line_begin, snippetType = "autosnippet" },
     fmta(
       [[
       \begin{enumerate}<>
@@ -111,7 +110,7 @@ return {
     )
   ),
   s(
-    { trig = "item", dscr = "itemize", condition = line_begin, snippetType = "autosnippet" },
+    { trig = "item", desc = "itemize", condition = line_begin, snippetType = "autosnippet" },
     fmta(
       [[
       \begin{itemize}<>
@@ -128,7 +127,7 @@ return {
     )
   ),
   s(
-    { trig = "pac", dscr = "include package", condition = line_begin },
+    { trig = "pac", desc = "include package", condition = line_begin },
     fmta("\\usepackage<>{<>}", {
       c(1, {
         sn(nil, { t("["), i(1, "options"), t("]") }),
